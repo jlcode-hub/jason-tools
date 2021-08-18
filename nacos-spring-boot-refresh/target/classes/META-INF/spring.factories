@@ -1,0 +1,6 @@
+org.springframework.context.ApplicationListener=\
+  com.alibaba.spring.refresh.NacosLoggingPreparedListener
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.alibaba.spring.refresh.NacosConfigRefreshScopeAutoConfiguration
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  com.alibaba.spring.refresh.utils.SystemPropertyPostProcessor

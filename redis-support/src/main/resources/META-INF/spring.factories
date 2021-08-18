@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+  com.jason.liu.redis.RedisAutoConfigurationExcludeFilter
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jason.liu.redis.RedisSupportAutoConfiguration

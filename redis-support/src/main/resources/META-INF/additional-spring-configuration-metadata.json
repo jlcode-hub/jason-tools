@@ -1,0 +1,12 @@
+{
+  "properties": [
+    {
+      "name": "spring.redis.enable-multi-source",
+      "type": "java.lang.Boolean",
+      "description": "开启多数据源 true:开启 false:关闭",
+      "sourceType": "com.jason.liu.redis.RedisSupportAutoRegistrar",
+      "defaultValue": false
+    }
+  ]
+}
+

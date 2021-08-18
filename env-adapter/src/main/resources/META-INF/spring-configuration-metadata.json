@@ -1,0 +1,12 @@
+{
+  "properties": [
+    {
+      "name": "environment.adapt.type",
+      "type": "com.jason.liu.env.adapter.Env",
+      "defaultValue": "platform",
+      "description": "适配环境类型",
+      "sourceType": "com.jason.liu.env.adapter.AdapterCondition"
+    }
+  ],
+  "hints": []
+}

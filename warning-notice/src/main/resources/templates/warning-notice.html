@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${title}</title>
+</head>
+
+<body leftmargin="8" marginwidth="0" topmargin="8" marginheight="4"
+      offset="0">
+<table width="95%" cellpadding="0" cellspacing="0"
+       style="font-size: 11pt; font-family: Tahoma, Arial, Helvetica, sans-serif">
+    <tr>
+        <td>(本邮件是程序自动下发的，请勿回复！)</td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>服务名称： <span style="color: #0000FF; " th:text="${serviceName}">未知</span></li>
+                <li>服务环境： <span th:text="${envName}">未知</span></li>
+                <li>业务名称： <span th:text="${businessName}">未知</span></li>
+                <li>异常描述： <span style="color: red;" th:text="${exceptionCause}">未知</span></li>
+                <li>产生时间： <span style="color: red;" th:text="${exceptionTime}">未知</span></li>
+                <li>处理建议： <span style="color: #007bff;" th:text="${handlingAdvice}">未知</span></li>
+                <li>
+                    关键参数：
+                    <ul th:each="item,itemStat:${paramMap}">
+                        <li><span th:text="${itemStat.current.key} + ': '"></span><span
+                                th:text="${itemStat.current.value}"></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>
+                <span style="color: #0B610B; ">异常详情:</span>
+            </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="125" rows="50" readonly="readonly"
+                      style="font-family: Courier New; word-break:break-all;" th:text="${exceptionStack}">
+            </textarea>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,6 @@
+org.springframework.context.ApplicationListener=\
+  com.jason.liu.nacos.refresh.NacosLoggingPreparedListener
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jason.liu.nacos.refresh.NacosConfigRefreshScopeAutoConfiguration
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  com.jason.liu.nacos.refresh.utils.SystemPropertyPostProcessor

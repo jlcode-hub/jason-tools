@@ -1,0 +1,26 @@
+{
+  "groups": [
+    {
+      "name": "jason.tools.counter",
+      "type": "com.jason.liu.counter.CounterProperties",
+      "sourceType": "com.jason.liu.counter.CounterProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jason.tools.counter.flush-interval",
+      "type": "java.lang.Long",
+      "description": "同步间隔 单位：（秒）",
+      "sourceType": "com.jason.liu.counter.CounterProperties",
+      "defaultValue": 3
+    },
+    {
+      "name": "jason.tools.counter.lock-time",
+      "type": "java.lang.Long",
+      "description": "锁定时长 单位：（秒）",
+      "sourceType": "com.jason.liu.counter.CounterProperties",
+      "defaultValue": 300
+    }
+  ],
+  "hints": []
+}
