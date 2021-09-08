@@ -1,10 +1,13 @@
 package com.jason.liu.nacos.refresh;
 
+import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
+import com.alibaba.nacos.spring.util.ConfigParseUtils;
 import com.jason.liu.nacos.refresh.utils.NacosLoggingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
@@ -21,13 +24,20 @@ public class NacosLoggerAutoRefreshProcessor {
 
     private NacosLoggingContext nacosLoggingContext;
 
+    /**
+     * 日志类型
+     */
+    @Value("${nacos.logger.config.type:PROPERTIES}")
+    private ConfigType configType;
+
     @Autowired
     public NacosLoggerAutoRefreshProcessor(NacosLoggingContext nacosLoggingContext) {
         this.nacosLoggingContext = nacosLoggingContext;
     }
 
     @NacosConfigListener(dataId = "${nacos.config.data-id}", groupId = "${nacos.config.group}", timeout = 30000)
-    public void onChange(Map<String, Object> properties) {
+    public void onChange(String context) {
+        Map<String, Object> properties = ConfigParseUtils.toProperties(context, configType.getType());
         this.nacosLoggingContext.refreshLogLevel(properties);
     }
 }
