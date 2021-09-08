@@ -3,7 +3,6 @@ package com.jason.liu.nacos.refresh.binder;
 import com.alibaba.boot.nacos.config.properties.NacosConfigProperties;
 import com.alibaba.nacos.api.annotation.NacosProperties;
 import com.alibaba.nacos.api.config.ConfigService;
-import com.alibaba.nacos.api.config.annotation.NacosIgnore;
 import com.alibaba.nacos.api.config.listener.AbstractListener;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -31,11 +30,8 @@ import org.springframework.core.ResolvableType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.util.Assert;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
 
@@ -148,37 +144,11 @@ public class NacosRefreshScopePropertiesBinder extends NacosConfigurationPropert
     protected void doBind(Object bean, String beanName, String dataId, String groupId,
                           String configType, NacosRefreshScope properties, ConfigurationProperties configurationProperties, String content,
                           ConfigService configService) {
-        ReflectionUtils.doWithFields(bean.getClass(),
-                new ReflectionUtils.FieldCallback() {
-
-                    @Override
-                    public void doWith(Field field)
-                            throws IllegalArgumentException, IllegalAccessException {
-                        field.setAccessible(true);
-                        if (field.isAnnotationPresent(NacosIgnore.class)) {
-                            return;
-                        }
-                        Class<?> type = field.getType();
-
-                        if (Map.class.isAssignableFrom(type)) {
-                            Map<?, ?> map = (Map<?, ?>) field.get(bean);
-                            if (null != map) {
-                                map.clear();
-                            }
-                        }
-                        if (Collection.class.isAssignableFrom(type)) {
-                            Collection<?> collection = (Collection<?>) field.get(bean);
-                            if (null != collection) {
-                                collection.clear();
-                            }
-                        }
-                    }
-                });
-        String name = "nacos-bootstrap-" + beanName;
+        String name = "nacos-refreshScope-" + beanName;
         NacosPropertySource propertySource = new NacosPropertySource(name, dataId,
                 groupId, content, configType);
         standardEnvironment.getPropertySources().addLast(propertySource);
-        Binder binder = Binder.get(environment);
+        Binder binder = Binder.get(standardEnvironment);
         ResolvableType type = getBeanType(bean, beanName);
         Bindable<?> target = Bindable.of(type).withExistingValue(bean);
         binder.bind(configurationProperties.prefix(), target);
