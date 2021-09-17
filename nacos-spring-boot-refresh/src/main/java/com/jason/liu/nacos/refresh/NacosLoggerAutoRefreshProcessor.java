@@ -27,7 +27,7 @@ public class NacosLoggerAutoRefreshProcessor {
     /**
      * 日志类型
      */
-    @Value("${nacos.logger.config.type:PROPERTIES}")
+    @Value("${nacos.config.type:PROPERTIES}")
     private ConfigType configType;
 
     @Autowired
